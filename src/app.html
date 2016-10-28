@@ -1,18 +1,40 @@
 <template>
-  <h1>${message}</h1>
+  <require from='./nav-bar.html'></require>
 
-  <form submit.trigger="addTodo()">
-    <input type="text" value.bind="todoDescription">
-    <button type="submit">Add Todo</button>
-  </form>
+  <nav-bar></nav-bar>
+  <br/>
 
-  <ul>
-    <li repeat.for="todo of todos">
-      <input type="checkbox" checked.bind="todo.done">
-      <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
-        ${todo.description}
-      </span>
-      <button click.trigger="removeTodo(todo)">Remove</button>
-    </li>
-  </ul>
+  <table style="border: 1px black solid;">
+    <tr repeat.for="r of ['A','B','A','B']" as-element="compose" view='./template_${r}.html'>
+      <!--   $index $first $last $even $odd    [a, b] of decomposed   -->
+  </table>
+  <br/>
+
+  <input type="text" value.bind="firstName">
+  <input type="text" value.one-way="firstName">
+  <input type="text" value.two-way="firstName">
+  <input type="text" value.one-time="firstName">
+  <br/><br/>
+
+  <div if.bind="firstName">${fullName}</div>
+  <div show.bind="firstName">${fullName}</div>
+  <br/>
+
+  <button click.trigger="save()">Save</button>
+  <button click.delegate="save($event)">Save</button>
+  <br/><br/>
+
+  <div innerhtml.bind="htmlProperty | sanitizeHTML"></div>
+  <div innerhtml="${htmlProperty | sanitizeHTML & debounce:1000}"></div>
+  <div textcontent.bind="htmlProperty" contenteditable="true"></div>
+  <br/>
+
+  <div style.bind="styleObject"></div>
+  <!--<div style.bind="styleString"></div>-->
+  <!--<div css="width: ${width}px; height: ${height}px;"></div>-->
+
+  <div my-attribute="literal value"></div>
+  <div my-attribute="foo: literal value; bar.bind: expression"></div>
+
+  <say-hello msg="replacing-default-value"></say-hello>
 </template>

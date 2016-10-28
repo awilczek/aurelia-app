@@ -1,3 +1,3 @@
 export function configure(config) {
-  //config.globalResources([]);
+  config.globalResources(["./attributes/myAttribute", "./elements/say-hello"]);
 }
